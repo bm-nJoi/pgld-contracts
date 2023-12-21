@@ -1,2 +1,7 @@
-# pgld-contracts
-dapp contracts for the $pgld ecosystem
+# PGLD Contracts Hardhat Project 
+
+```shell
+npm i
+npx hardhat compile
+npx hardhat run scripts/deploy.ts
+```

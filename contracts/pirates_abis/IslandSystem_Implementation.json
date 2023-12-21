@@ -1,0 +1,412 @@
+[
+  {
+    "inputs": [],
+    "name": "AccountStillInCooldown",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "entity",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidEntity",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidGameRegistry",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "objectEntity",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidItem",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "instanceEntity",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidItemInstance",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "entity",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidOwnerForEntity",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "expectedRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "MissingRole",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "NotOwner",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Paused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "sceneEntity",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "objectEntity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "instanceEntity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "int64",
+            "name": "x",
+            "type": "int64"
+          },
+          {
+            "internalType": "int64",
+            "name": "y",
+            "type": "int64"
+          },
+          {
+            "internalType": "int64",
+            "name": "z",
+            "type": "int64"
+          },
+          {
+            "internalType": "int64",
+            "name": "rotation",
+            "type": "int64"
+          }
+        ],
+        "internalType": "struct SceneObjectParams[]",
+        "name": "addedObjectParams",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "addOrUpdateSceneObjects",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "requestId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "randomWords",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "fulfillRandomWordsCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getGameRegistry",
+    "outputs": [
+      {
+        "internalType": "contract IGameRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "gameRegistryAddress",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "forwarder",
+        "type": "address"
+      }
+    ],
+    "name": "isTrustedForwarder",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "paused",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "sceneEntity",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "removedInstanceEntities",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "removeSceneObjects",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "gameRegistryAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setGameRegistry",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "shouldPause",
+        "type": "bool"
+      }
+    ],
+    "name": "setPaused",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "sceneEntity",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "removedInstanceEntities",
+        "type": "uint256[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "objectEntity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "instanceEntity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "int64",
+            "name": "x",
+            "type": "int64"
+          },
+          {
+            "internalType": "int64",
+            "name": "y",
+            "type": "int64"
+          },
+          {
+            "internalType": "int64",
+            "name": "z",
+            "type": "int64"
+          },
+          {
+            "internalType": "int64",
+            "name": "rotation",
+            "type": "int64"
+          }
+        ],
+        "internalType": "struct SceneObjectParams[]",
+        "name": "addedObjectParams",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "updateScene",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
