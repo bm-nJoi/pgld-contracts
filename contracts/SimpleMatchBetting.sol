@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {BattleAndGauntletContract} from "./BattleAndGauntletContract.sol";
+import {BGStateContract} from "./BGStateContract.sol";
 
 contract SimpleMatchBetting {
     address battleAddress;
@@ -18,6 +18,7 @@ contract SimpleMatchBetting {
         EXPIRED
     }
     struct Bet {
+        uint32 id;
         address user;
         uint32 matchId; // id for contract map
         uint8 result; // 0->X, admin-run result enumeration
@@ -26,20 +27,21 @@ contract SimpleMatchBetting {
     }
 
     struct Match {
+        uint32 id;
         uint8 resultRange; // maximum result option, so 2 would mean 1 and 2 are hte only answers allowed
         uint8 result; // 0 = undefined, 1->uint8 are result options
         bool complete;
         uint256 expirationTime;
     }
 
-    uint32 public matchCounter = 0;
+    uint32 public matchCounter = 1;
     mapping(uint32 => Match) public matches;
     mapping(uint32 => uint256) public totalPoolAmounts; // maps matchId to its pools
     uint256 public totalDevPool = 0;
     // experimental
     mapping(address => uint256) public userPoolAmounts; // maps user address to their withdrawable pool amt
 
-    uint32 public betCounter = 0;
+    uint32 public betCounter = 1;
     mapping(uint32 => Bet) public bets;
 
     // make a mapping for tracking what bets belong to what matches
@@ -65,6 +67,7 @@ contract SimpleMatchBetting {
         matchCounter = matchCounter + 1;
 
         Match memory newMatch = Match({
+            id: matchId,
             resultRange: resultRange,
             result: 0,
             complete: false,
@@ -96,6 +99,7 @@ contract SimpleMatchBetting {
         require(betId + 1 > betId, "Bet counter overflow"); // Check for overflow
 
         Bet memory newBet = Bet({
+            id: betId,
             user: msg.sender,
             matchId: matchId,
             result: predictedResult,
@@ -107,6 +111,10 @@ contract SimpleMatchBetting {
         matchToBets[matchId].push(betId);
 
         emit BetPlaced(betId, matchId, msg.sender, predictedResult, amount);
+    }
+
+    function placeAnotherBet(uint32 matchId, uint256 amount, uint8 predictedResult) external { 
+        emit BetPlaced(0, matchId, msg.sender, predictedResult, amount);
     }
 
     function cancelBet(uint32 betId) external {

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract BattleAndGauntletContract {
+contract BGStateContract {
     struct BattleState {
         uint256 battleId;
         bool success;
