@@ -15,6 +15,7 @@ contract TestMatchBetting {
         CANCELLED,
         EXPIRED
     }
+    
     struct Bet {
         uint256 id;
         address user;
@@ -82,10 +83,10 @@ contract TestMatchBetting {
     // betting function for a true/false result
     //// will be set by a battleevent being processed via client
     function placeBet(uint256 _matchId, uint256 _amount, uint256 _predictedResult) external {
-        // require(_matchId < matchCounter, "matchId must be valid, below the matchCounter");
-        // require(_amount > 0, "Bet amount must be greater than 0");
-        // require(_predictedResult <= matches[_matchId].resultRange, "Predicted result must be within allowable range.");
-        // require(matches[_matchId].complete == false, "Match must be incomplete to place a bet.");
+        require(_matchId < matchCounter, "matchId must be valid, below the matchCounter");
+        require(_amount > 0, "Bet amount must be greater than 0");
+        require(_predictedResult <= matches[_matchId].resultRange, "Predicted result must be within allowable range.");
+        require(matches[_matchId].complete == false, "Match must be incomplete to place a bet.");
         betCounter++;
         uint256 betId = betCounter;
 
@@ -120,6 +121,7 @@ contract TestMatchBetting {
     }
 
     function processResults(uint256 _matchId, uint256 _actualResult) external {
+        require(matches[_matchId].complete == false, "Match must be incomplete to place a bet.");
         matches[_matchId].complete = true;
         matches[_matchId].result = _actualResult;
         
