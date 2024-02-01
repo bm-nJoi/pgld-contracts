@@ -8,7 +8,6 @@ contract GauntletRacing {
     //address gauntletAddress;
     address treasuryAddress;
     uint256 public treasuryRoyaltyRate = 5;
-    
 
     struct Race {
         address creator;

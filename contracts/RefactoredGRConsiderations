@@ -1,0 +1,63 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+contract GauntletRacing {
+    IERC20 private wagerToken;
+    address treasuryAddress;
+    uint256 public treasuryRoyaltyRate = 5;
+
+    struct Race {
+        address creator;
+        uint256 wagerAmount;
+        uint256 expirationTime; // in seconds from midnight UTC
+        bool isStarted;
+        bool isCompleted;
+    }
+
+    mapping(uint256 => Race) public races;
+    uint256 public nextRaceId;
+
+    uint256 public treasuryPool;
+
+    // Events
+    event RaceCreated(uint256 indexed raceId, address indexed creator, uint256 wagerAmount, uint256 expirationTime);
+    event RaceStarted(uint256 indexed raceId);
+    event RaceCompleted(uint256 indexed raceId, address[] winners, uint256 netPayout, bool isExpired);
+    event RacerJoined(uint256 indexed raceId, address indexed racer);
+    event RacerLeft(uint256 indexed raceId, address indexed racer);
+    event ScoreSubmitted(uint256 indexed raceId, address indexed racer, uint256 completionTime);
+
+    constructor(address _wagerTokenAddress) {
+        wagerToken = IERC20(_wagerTokenAddress);
+    }
+
+    // Create a new race
+    function createRace(uint256 _wagerAmount, uint256 _expirationTime) external {
+        require(_wagerAmount > 0, "Wager amount must be greater than zero");
+        require(_expirationTime > block.timestamp, "Expiration time must be future time");
+
+        uint256 raceId = nextRaceId++;
+        races[raceId] = Race({
+            creator: msg.sender,
+            wagerAmount: _wagerAmount,
+            expirationTime: _expirationTime,
+            isStarted: false,
+            isCompleted: false
+        });
+
+        emit RaceCreated(raceId, msg.sender, _wagerAmount, _expirationTime);
+    }
+
+    // Other functions like joinRace, leaveRace, submitScore, completeRace
+    // ...
+
+    // Simplified getters (if needed)
+    function getRaceDetails(uint256 _raceId) public view returns (Race memory) {
+        return races[_raceId];
+    }
+
+    // Additional functions for handling treasury, starting race, etc.
+    // ...
+}
